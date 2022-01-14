@@ -7,6 +7,8 @@
 **Example of request**: Spin up the microservice, and go to `http://localhost:8081/?size=350&data=This%20is%20a%20test` 
 - (*If you wanted to do this from a command line*, then install `viu` + `curl` and run `curl http://localhost:8081/\?size\=350\&data\=This%20is%20a%20test -s | viu -`!) 
 
+**Public Endpoint**: https://qr-api.ashleyprimo.com/docs
+
 ```
 Usage of go-qr-generator:
   -address string
