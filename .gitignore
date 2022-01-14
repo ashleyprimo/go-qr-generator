@@ -1,0 +1,3 @@
+# Ignore Binary
+# You can build this yourself, `go build`
+go-qr-generator
