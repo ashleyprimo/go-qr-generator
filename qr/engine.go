@@ -1,19 +1,21 @@
 package qr
 
 import (
-	"fmt"
-	"net"
-	//	"flag"
 	"bytes"
+	"fmt"
+	"image"
 	"image/png"
+	"net"
 	"net/http"
 	"net/url"
 	"strconv"
 
 	"github.com/ashleyprimo/go-qr-generator/initialize"
 
-	"github.com/boombuler/barcode"
+	//	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/qr"
+	//	"github.com/nfnt/resize"
+
 	log "github.com/sirupsen/logrus"
 )
 
@@ -119,18 +121,19 @@ func Engine(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Add border
+	var codeBordered image.Image = WhiteBorder{1, code}
+
 	// Scale the barcode to the appropriate size
-	code, err = barcode.Scale(code, sizeInt, sizeInt)
+	codeScaled, err := scale(codeBordered, uint(sizeInt))
 	if err != nil {
 		InternalServerError(w, r, "Unable to scale QR code.")
 		return
-	} else {
-		log.Debugf("Generated QR Code: %s", code)
 	}
 
 	// Encode PNG
 	buffer := new(bytes.Buffer)
-	if err := png.Encode(buffer, code); err != nil {
+	if err := png.Encode(buffer, codeScaled); err != nil {
 		InternalServerError(w, r, "Unable to encode PNG from code buffer.")
 		return
 	}
