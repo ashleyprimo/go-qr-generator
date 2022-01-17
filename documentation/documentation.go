@@ -2,10 +2,10 @@ package docs
 
 import (
 	"fmt"
+	"net/http"
 	"strconv"
-        "net/http"
 
-        "github.com/ashleyprimo/go-qr-generator/initialize"
+	"github.com/ashleyprimo/go-qr-generator/initialize"
 )
 
 func Landing(w http.ResponseWriter, r *http.Request) {
@@ -54,4 +54,3 @@ func Landing(w http.ResponseWriter, r *http.Request) {
 	)
 	w.Write([]byte(fmt.Sprintf(documentationPage, initialize.ApplicationName, r.Host, *initialize.QREndpoint, strconv.Itoa(*initialize.MaxSize), strconv.Itoa(*initialize.DefaultSize))))
 }
-
