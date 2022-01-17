@@ -7,9 +7,9 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-        "github.com/ashleyprimo/go-qr-generator/initialize"
+	"github.com/ashleyprimo/go-qr-generator/documentation"
+	"github.com/ashleyprimo/go-qr-generator/initialize"
 	"github.com/ashleyprimo/go-qr-generator/qr"
-        "github.com/ashleyprimo/go-qr-generator/documentation"
 )
 
 func loglevel(opt string) {
@@ -28,32 +28,32 @@ func loglevel(opt string) {
 }
 
 func health(w http.ResponseWriter, r *http.Request) {
-        w.WriteHeader(http.StatusOK)
-        w.Write([]byte("Ping."))
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Ping."))
 }
 
 func main() {
-        initialize.Flags()
+	initialize.Flags()
 
 	if *initialize.VersionFlag {
-                fmt.Printf("%s v%s", initialize.ApplicationName, initialize.Version)
-      		os.Exit(0)
-    	}
+		fmt.Printf("%s v%s", initialize.ApplicationName, initialize.Version)
+		os.Exit(0)
+	}
 
 	loglevel(*initialize.LogLevel)
-        metrics()
+	metrics()
 
 	// QR Engine API Endpoint
 	http.HandleFunc(*initialize.QREndpoint, qr.Engine)
 
 	// Documentation Endpoint
 	if *initialize.EnableDocs {
-                log.Debugf("Documentation Endpoint Enabled")
-	        http.HandleFunc("/docs", docs.Landing)
+		log.Debugf("Documentation Endpoint Enabled")
+		http.HandleFunc("/docs", docs.Landing)
 	}
 
 	// Health Check Endpoint
-        http.HandleFunc("/health", health)
+	http.HandleFunc("/health", health)
 
 	log.Infof("Listening for requests on %s:%s", *initialize.Host, *initialize.PortNumber)
 
