@@ -12,9 +12,7 @@ import (
 
 	"github.com/ashleyprimo/go-qr-generator/initialize"
 
-	//	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/qr"
-	//	"github.com/nfnt/resize"
 
 	log "github.com/sirupsen/logrus"
 )
