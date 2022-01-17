@@ -11,18 +11,24 @@
 
 ```
 Usage of ./go-qr-generator:
-  -address string
-    	The address to listen on for HTTP requests. (default "0.0.0.0")
   -enable.docs
     	Enable documentation (/docs) endpoint. (default true)
   -enable.metrics
     	Enable metrics (/metrics) endpoint. (default true)
+  -enable.metrics.server
+    	Enable seperate metrics server
+  -host string
+    	The host/address to listen on for HTTP requests. (default "0.0.0.0")
   -https
     	Enable, or Disable HTTPS
   -log.conn
     	Log connections to API (default true)
   -log.level string
     	The level of logs to log (default "info")
+  -metrics.server.host string
+    	The host/address to listen on for metrics HTTP requests. (default "0.0.0.0")
+  -metrics.server.port string
+    	The port number to listen on for metrics HTTP requests. (default "9100")
   -port string
     	The port number to listen on for HTTP requests. (default "8080")
   -qr.default.size int
